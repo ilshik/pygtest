@@ -24,7 +24,7 @@ from gagamel import Gagamel
 gaga = Gagamel()
 gaga.set_bound((width,height))
 gaga.set_image('2659980.png',(50,50))
-gaga.set_pos((100,100))
+gaga.set_pos( (width / 2, height / 2))
 
 while True: # 아래의 코드를 무한 반복한다.
     for event in pygame.event.get(): # 발생한 입력 event 목록의 event마다 검사
