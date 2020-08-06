@@ -2,7 +2,7 @@ import pygame
 import random
 
 class Gagamel:
-
+   
     def __init__(self):
         print('init')
         super().__init__()
