@@ -42,10 +42,14 @@ while True: # 아래의 코드를 무한 반복한다.
                 height+=10
         elif event.type == MOUSEMOTION:
             width,height = pygame.mouse.get_pos()
-    gaga.set_randpos()
+
     displaysurf.fill(white) # displaysurf를 하얀색으로 채운다
     hellorect.center = (width,height ) # 해당 rect의 중앙을 화면 중앙에 맞춘다    
     displaysurf.blit(helloworld, hellorect) # displaysurf의 hellorect의 위치에 helloworld를 뿌린다
-    displaysurf.blit(gaga.get_pyg(),gaga.get_pos())
+
+    gaga.set_antpos((width,height))
+    gaga.set_randpos()
+    displaysurf.blit(gaga.get_pyg(),gaga.get_rect())
+
     pygame.display.update() # 화면을 업데이트한다
     clock.tick(fps) # 화면 표시 회수 설정만큼 루프의 간격을 둔다
