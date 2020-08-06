@@ -22,7 +22,7 @@ hellorect.center = (width / 2, height / 2) # 해당 rect의 중앙을 화면 중
 
 from gagamel import Gagamel 
 gaga = Gagamel()
-gaga.set_bound((400,600))
+gaga.set_bound((width,height))
 gaga.set_image('2659980.png',(50,50))
 gaga.set_pos((100,100))
 
