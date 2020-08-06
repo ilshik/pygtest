@@ -14,9 +14,12 @@ pygame.display.set_caption('Hello, world!') # 창 제목 설정
 displaysurf = pygame.display.set_mode((width, height), 0, 32) # 메인 디스플레이를 설정한다
 clock = pygame.time.Clock() # 시간 설정
 
-gulimfont = pygame.font.SysFont('굴림', 70) # 서체 설정
-helloworld = gulimfont.render('Hello, world!', 1, black) 
+#gulimfont = pygame.font.SysFont('굴림', 70) # 서체 설정
+#helloworld = gulimfont.render('Hello, world!', 1, black) 
 # .render() 함수에 내용과 안티앨리어싱, 색을 전달하여 글자 이미지 생성
+
+helloworld = pygame.image.load('attack.png')
+helloworld = pygame.transform.scale(helloworld, (50,50))
 hellorect = helloworld.get_rect() # 생성한 이미지의 rect 객체를 가져온다
 hellorect.center = (width / 2, height / 2) # 해당 rect의 중앙을 화면 중앙에 맞춘다
 
