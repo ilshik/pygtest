@@ -30,15 +30,15 @@ class Gagamel:
         if self._pos[1]-self._img_size[1]/2<=0:
             self._pos=(self._pos[0],20)
 
-        #if (abs(self._pos[0]+self._img_size[0]-self._antpos[0])<10 and abs(self._pos[1]+self._img_size[1]-self._antpos[1]<10)
-        if self._pos[0]>=self._antpos[0] and self._pos[0]-self._antpos[0]<10:
-            self._pos=(self._pos[0]+50,self._pos[1])
-        if self._pos[0]<self._antpos[0] and self._antpos[0]-self._pos[0]<10:
-            self._pos=(self._pos[0]-50,self._pos[1])
-        if self._pos[1]>=self._antpos[1] and self._pos[1]-self._antpos[1]<10:
-            self._pos=(self._pos[0],self._pos[1]+50)
-        if self._pos[1]<self._antpos[1] and self._antpos[1]-self._pos[1]<10:
-            self._pos=(self._pos[0],self._pos[1]-50)
+        if abs(self._pos[0]-self._antpos[0])<10 and abs(self._pos[1]-self._antpos[1])<10:
+            if self._pos[0]>=self._antpos[0] and self._pos[0]-self._antpos[0]<10:
+                self._pos=(self._pos[0]+30,self._pos[1])
+            if self._pos[0]<self._antpos[0] and self._antpos[0]-self._pos[0]<10:
+                self._pos=(self._pos[0]-30,self._pos[1])
+            if self._pos[1]>=self._antpos[1] and self._pos[1]-self._antpos[1]<10:
+                self._pos=(self._pos[0],self._pos[1]+30)
+            if self._pos[1]<self._antpos[1] and self._antpos[1]-self._pos[1]<10:
+                self._pos=(self._pos[0],self._pos[1]-30)
 
         print(self._pos)        
     def get_pos(self):
