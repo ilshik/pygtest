@@ -38,6 +38,8 @@ gaga.set_bound((width,height))
 
 bullets = []
 
+crashpos = (width,height)
+
 while True: # 아래의 코드를 무한 반복한다.
     
     displaysurf.fill(white) # displaysurf를 하얀색으로 채운다
@@ -88,7 +90,15 @@ while True: # 아래의 코드를 무한 반복한다.
                 del bullet
                 del bullets[i]
             i=i+1        
-
+    if gaga.get_status()==1:
+        crashpos = (width, height)
+    elif gaga.get_status()>5:
+        gaga.set_status()            
+    if gaga.get_status()>0:
+        hit = Attacker()
+        hit.set_image('boom.png',(50,50))
+        hit.set_pos(crashpos)
+        displaysurf.blit(hit.get_pyg(),hit.get_rect())
     displaysurf.blit(gaga.get_pyg(),gaga.get_rect())
     pygame.display.update() # 화면을 업데이트한다
     clock.tick(fps) # 화면 표시 회수 설정만큼 루프의 간격을 둔다
