@@ -8,6 +8,7 @@ class Bullet(Object):
         print('Bullet init')
         super().__init__()
         self._dead = False
+        self._deadcount = 0
         
     def __new__(cls):
         print('Bullet new')
@@ -55,6 +56,7 @@ class Bullet(Object):
         return out
     def crash(self):
         if self._dead:
+            self._deadcount = self._deadcount + 1
             return False
         if abs(self._pos[0]-self._antpos[0])<self._img_size[0] and abs(self._pos[1]-self._antpos[1])<self._img_size[1]:
             print('crash',self._pos,self._antpos)
@@ -64,4 +66,4 @@ class Bullet(Object):
     def set_antpos(self,antpos):
         self._antpos = antpos
     def get_status(self):
-        return self._dead
+        return self._deadcount

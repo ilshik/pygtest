@@ -77,13 +77,13 @@ while True: # 아래의 코드를 무한 반복한다.
     if len(bullets)>0:
         i=0
         for bullet in bullets:
-            displaysurf.blit(bullet.get_pyg(),bullet.nextpos())
+            bullet.nextpos()
+            bullet.set_antpos((width,height))
+            bullet.crash()
+            displaysurf.blit(bullet.get_pyg(),bullet.get_pos())
 #            gaga.set_antpos(bullet.get_pos())
 #            gaga.run_away()
-            bullet.set_antpos((width,height))
-            if bullet.crash():
-                displaysurf.blit(bullet.get_pyg(),bullet.get_pos())  
-            elif bullet.is_out() or bullet.get_status():
+            if bullet.is_out() or bullet.get_status()>5:
                 print ('Bullet del',i,len(bullets))
                 del bullet
                 del bullets[i]
