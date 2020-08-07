@@ -4,6 +4,7 @@ from pygame.locals import * # QUIT 등의 pygame 상수들을 로드한다.
 from gagamel import Gagamel 
 from attacker import Attacker
 from bullet import Bullet
+import random
 
 width = 600 # 상수 설정
 height = 400
@@ -40,6 +41,8 @@ bullets = []
 while True: # 아래의 코드를 무한 반복한다.
     
     displaysurf.fill(white) # displaysurf를 하얀색으로 채운다
+    gaga.set_antpos((width,height))
+    gaga.set_randpos()
 
     for event in pygame.event.get(): # 발생한 입력 event 목록의 event마다 검사
         if event.type == QUIT: # event의 type이 QUIT에 해당할 경우
@@ -58,24 +61,34 @@ while True: # 아래의 코드를 무한 반복한다.
                 height+=10
             if event.key == pygame.K_SPACE:
                 bullet = Bullet()
-                bullet.bullet_factory((width,height),(600,400),gaga.get_pos())
+#                bullet.bullet_factory((width,height),(600,400),gaga.get_pos())
+                bullet.bullet_factory(gaga.get_pos(),(600,400),(width,height))
                 bullets.append(bullet)
+    if random.randint(0,10)>8:
+        bullet = Bullet()
+    #   bullet.bullet_factory((width,height),(600,400),gaga.get_pos())
+        bullet.bullet_factory(gaga.get_pos(),(600,400),(width,height))
+        bullets.append(bullet)
 
     atkr.set_pos((width,height))
     displaysurf.blit(atkr.get_pyg(), atkr.get_rect()) # displaysurf의 hellorect의 위치에 helloworld를 뿌린다
+    gaga.run_away()
 
-    gaga.set_antpos((width,height))
-    gaga.set_randpos()
-    displaysurf.blit(gaga.get_pyg(),gaga.get_rect())
     if len(bullets)>0:
         i=0
         for bullet in bullets:
             displaysurf.blit(bullet.get_pyg(),bullet.nextpos())
-            if bullet.is_out():
+#            gaga.set_antpos(bullet.get_pos())
+#            gaga.run_away()
+            bullet.set_antpos((width,height))
+            if bullet.crash():
+                displaysurf.blit(bullet.get_pyg(),bullet.get_pos())  
+            elif bullet.is_out() or bullet.get_status():
                 print ('Bullet del',i,len(bullets))
                 del bullet
                 del bullets[i]
-            i=i+1
+            i=i+1        
 
+    displaysurf.blit(gaga.get_pyg(),gaga.get_rect())
     pygame.display.update() # 화면을 업데이트한다
     clock.tick(fps) # 화면 표시 회수 설정만큼 루프의 간격을 둔다

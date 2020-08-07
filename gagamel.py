@@ -14,8 +14,10 @@ class Gagamel(Object):
 
     def set_randpos(self):
         self.set_direction()
-        
         self._pos = (self._pos[0] + self._gowhere[0],self._pos[1] + self._gowhere[1])
+        self.run_away()
+
+    def run_away(self):
         if self._pos[0]+self._img_size[0]/2>=self._bound[0]:
             self._pos=(self._pos[0]-20,self._pos[1])
         if self._pos[0]-self._img_size[0]/2<=0:
@@ -24,20 +26,20 @@ class Gagamel(Object):
             self._pos=(self._pos[0],self._pos[1]-20)
         if self._pos[1]-self._img_size[1]/2<=0:
             self._pos=(self._pos[0],20)
+        xpos,ypos = self._pos
+        if abs(self._pos[0]-self._antpos[0])<self._img_size[0] and abs(self._pos[1]-self._antpos[1])<self._img_size[1]:
+            if self._pos[0]>=self._antpos[0] and self._pos[0]-self._antpos[0]<self._img_size[0]:
+                xpos = self._pos[0]+10
+            if self._pos[0]<self._antpos[0] and self._antpos[0]-self._pos[0]<self._img_size[0]:
+                xpos = self._pos[0]-10
+            if self._pos[1]>=self._antpos[1] and self._pos[1]-self._antpos[1]<self._img_size[1]:
+                ypos = self._pos[1]+10
+            if self._pos[1]<self._antpos[1] and self._antpos[1]-self._pos[1]<self._img_size[1]:
+                ypos = self._pos[1]-10
+        self.set_pos((xpos,ypos))      
 
-        if abs(self._pos[0]-self._antpos[0])<self._img_size[0]/2 and abs(self._pos[1]-self._antpos[1])<self._img_size[1]/2:
-            if self._pos[0]>=self._antpos[0] and self._pos[0]-self._antpos[0]<self._img_size[0]/2:
-                self._pos=(self._pos[0]+30,self._pos[1])
-            if self._pos[0]<self._antpos[0] and self._antpos[0]-self._pos[0]<self._img_size[0]/2:
-                self._pos=(self._pos[0]-30,self._pos[1])
-            if self._pos[1]>=self._antpos[1] and self._pos[1]-self._antpos[1]<self._img_size[1]/2:
-                self._pos=(self._pos[0],self._pos[1]+30)
-            if self._pos[1]<self._antpos[1] and self._antpos[1]-self._pos[1]<self._img_size[1]/2:
-                self._pos=(self._pos[0],self._pos[1]-30)
-
-        self.set_pos(self._pos)      
     def set_direction(self):
-        self._gowhere = (random.randint(-10,10),random.randint(-10,10))
+        self._gowhere = (random.randint(-9,9),random.randint(-9,9))
     def get_direction(self):
         return self._gowhere
     def set_bound(self,bound):
