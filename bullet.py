@@ -19,7 +19,7 @@ class Bullet(Object):
         self._img_size = (20,20)
         self.set_pos(pos)
         self.set_bound(bound)
-        self.set_speed(10)
+        self.set_speed(20)
         src_posx = pos[0]
         src_posy = pos[1]
         target_posx = antpos[0]
@@ -57,12 +57,12 @@ class Bullet(Object):
     def crash(self):
         if self._dead:
             self._deadcount = self._deadcount + 1
-            return False
-        if abs(self._pos[0]-self._antpos[0])<self._img_size[0] and abs(self._pos[1]-self._antpos[1])<self._img_size[1]:
+        elif abs(self._pos[0]-self._antpos[0])<self._img_size[0] and abs(self._pos[1]-self._antpos[1])<self._img_size[1]:
             print('crash',self._pos,self._antpos)
             self._dead = True
             self.set_image('crash.png',(30,30))
-        return self._dead
+            self._deadcount = 1
+        return self._deadcount
     def set_antpos(self,antpos):
         self._antpos = antpos
     def get_status(self):
