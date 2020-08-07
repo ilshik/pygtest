@@ -46,6 +46,11 @@ while True: # 아래의 코드를 무한 반복한다.
     gaga.set_antpos((width,height))
     gaga.set_randpos()
 
+
+
+
+
+
     for event in pygame.event.get(): # 발생한 입력 event 목록의 event마다 검사
         if event.type == QUIT: # event의 type이 QUIT에 해당할 경우
             pygame.quit() # pygame을 종료한다
@@ -66,7 +71,7 @@ while True: # 아래의 코드를 무한 반복한다.
 #                bullet.bullet_factory((width,height),(600,400),gaga.get_pos())
                 bullet.bullet_factory(gaga.get_pos(),(600,400),(width,height))
                 bullets.append(bullet)
-    if random.randint(0,10)>8:
+    if random.randint(0,100)>99:
         bullet = Bullet()
     #   bullet.bullet_factory((width,height),(600,400),gaga.get_pos())
         bullet.bullet_factory(gaga.get_pos(),(600,400),(width,height))
@@ -81,7 +86,8 @@ while True: # 아래의 코드를 무한 반복한다.
         for bullet in bullets:
             bullet.nextpos()
             bullet.set_antpos((width,height))
-            bullet.crash()
+            if bullet.crash() == 1:
+                atkr.add_hurt()
             displaysurf.blit(bullet.get_pyg(),bullet.get_pos())
 #            gaga.set_antpos(bullet.get_pos())
 #            gaga.run_away()
@@ -92,6 +98,7 @@ while True: # 아래의 코드를 무한 반복한다.
             i=i+1        
     if gaga.get_status()==1:
         crashpos = (width, height)
+        gaga.add_hurt()
     elif gaga.get_status()>5:
         gaga.set_status()            
     if gaga.get_status()>0:
@@ -99,6 +106,17 @@ while True: # 아래의 코드를 무한 반복한다.
         hit.set_image('boom.png',(50,50))
         hit.set_pos(crashpos)
         displaysurf.blit(hit.get_pyg(),hit.get_rect())
+        
     displaysurf.blit(gaga.get_pyg(),gaga.get_rect())
+
+    font = pygame.font.SysFont('hy견고딕',30)  #폰트 설정
+    text = font.render("칼:"+str(atkr.get_hurt()),True,(28,0,0))  #텍스트가 표시된 Surface 를 만듬
+    displaysurf.blit(text,(10,10))              #화면에 표시
+
+    font1 = pygame.font.SysFont('hy견고딕',30)  #폰트 설정
+    text1 = font1.render("세균:"+str(gaga.get_hurt()),True,(28,0,0))  #텍스트가 표시된 Surface 를 만듬
+    displaysurf.blit(text1,(470,10))              #화면에 표시
+
+
     pygame.display.update() # 화면을 업데이트한다
     clock.tick(fps) # 화면 표시 회수 설정만큼 루프의 간격을 둔다

@@ -5,6 +5,7 @@ class Object:
     def __init__(self):
         print('super init')
         super().__init__()
+        self._hitcnt = 0
     def __new__(cls):
         print('super new')
         return super().__new__(cls)
@@ -22,3 +23,7 @@ class Object:
         return self._pyg
     def get_rect(self):
         return self._rect        
+    def add_hurt(self):
+        self._hitcnt += 1
+    def get_hurt(self):
+        return self._hitcnt
