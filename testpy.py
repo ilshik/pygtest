@@ -116,7 +116,13 @@ while True: # 아래의 코드를 무한 반복한다.
     font1 = pygame.font.SysFont('hy견고딕',30)  #폰트 설정
     text1 = font1.render("세균:"+str(gaga.get_hurt()),True,(28,0,0))  #텍스트가 표시된 Surface 를 만듬
     displaysurf.blit(text1,(470,10))              #화면에 표시
+    if atkr.get_hurt() >=100:
+        pygame.quit() # pygame을 종료한다
+        sys.exit() # 창을 닫는다   
 
-
+    if gaga.get_hurt() >=100:
+        pygame.quit() # pygame을 종료한다
+        sys.exit() # 창을 닫는다
+    
     pygame.display.update() # 화면을 업데이트한다
     clock.tick(fps) # 화면 표시 회수 설정만큼 루프의 간격을 둔다
