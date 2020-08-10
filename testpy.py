@@ -71,7 +71,7 @@ while True: # 아래의 코드를 무한 반복한다.
 #                bullet.bullet_factory((width,height),(600,400),gaga.get_pos())
                 bullet.bullet_factory(gaga.get_pos(),(600,400),(width,height))
                 bullets.append(bullet)
-    if random.randint(0,100)>99:
+    if random.randint(0,100)>90:
         bullet = Bullet()
     #   bullet.bullet_factory((width,height),(600,400),gaga.get_pos())
         bullet.bullet_factory(gaga.get_pos(),(600,400),(width,height))
@@ -109,14 +109,21 @@ while True: # 아래의 코드를 무한 반복한다.
         
     displaysurf.blit(gaga.get_pyg(),gaga.get_rect())
 
-    font = pygame.font.SysFont('hy견고딕',30)  #폰트 설정
-    text = font.render("칼:"+str(atkr.get_hurt()),True,(28,0,0))  #텍스트가 표시된 Surface 를 만듬
-    displaysurf.blit(text,(10,10))              #화면에 표시
+#    font = pygame.font.SysFont('hy견고딕',30)  #폰트 설정
+#    text = font.render("칼:"+str(atkr.get_hurt()),True,(28,0,0))  #텍스트가 표시된 Surface 를 만듬
+#    displaysurf.blit(text,(10,10))              #화면에 표시
 
-    font1 = pygame.font.SysFont('hy견고딕',30)  #폰트 설정
-    text1 = font1.render("세균:"+str(gaga.get_hurt()),True,(28,0,0))  #텍스트가 표시된 Surface 를 만듬
-    displaysurf.blit(text1,(470,10))              #화면에 표시
+#    font1 = pygame.font.SysFont('hy견고딕',30)  #폰트 설정
+#    text1 = font1.render("세균:"+str(gaga.get_hurt()),True,(28,0,0))  #텍스트가 표시된 Surface 를 만듬
+#    displaysurf.blit(text1,(470,10))              #화면에 표시
 
+    redsign = gaga.get_hurt()
+    bluesign = atkr.get_hurt()
+
+    pygame.draw.rect(displaysurf,(255,0,0),[10,15,100,15],2)
+    pygame.draw.rect(displaysurf,(0,0,255),[480,15,100,15],2)
+    pygame.draw.rect(displaysurf,(255,0,0),[10,15,100-redsign,15])
+    pygame.draw.rect(displaysurf,(0,0,255),[480,15,100-bluesign,15])
 
     pygame.display.update() # 화면을 업데이트한다
     clock.tick(fps) # 화면 표시 회수 설정만큼 루프의 간격을 둔다

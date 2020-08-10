@@ -25,5 +25,7 @@ class Object:
         return self._rect        
     def add_hurt(self):
         self._hitcnt += 1
+        if self._hitcnt > 100:
+            self._hitcnt = 100
     def get_hurt(self):
         return self._hitcnt
